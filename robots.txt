@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fkevrogol.github.io/Evro-Gol/sitemap.xml
