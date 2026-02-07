@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ФК ЕВРО ГОЛ ПРИЛЕП</title>
+  <style>
+    :root{
+      --red:#b30000;
+      --red2:#8f0000;
+      --bg:#f4f4f6;
+      --card:#ffffff;
+      --text:#1b1b1f;
+      --muted:#6b6b75;
+      --line:#e7e7ee;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.6;
+    }
+
+    /* HEADER */
+    header{
+      background:linear-gradient(0deg, var(--red2), var(--red));
+      color:#fff;
+      padding:18px 14px 10px;
+      position:sticky;
+      top:0;
+      z-index:50;
+      box-shadow:0 8px 24px rgba(0,0,0,.15);
+    }
+
+    .topbar{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .logo{
+      width:78px;
+      height:78px;
+      border-radius:16px;
+      background:rgba(255,255,255,.1);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      border:2px solid rgba(255,255,255,.25);
+    }
+
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      padding:8px;
+    }
+
+    .clubname{
+      text-align:center;
+    }
+
+    .clubname h1{
+      margin:0;
+      font-size:clamp(20px, 3.2vw, 34px);
+      letter-spacing:1px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    /* NAV */
+    nav{
+      max-width:var(--max);
+      margin:12px auto 0;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .tab{
+      border:2px solid rgba(255,255,255,.35);
+      color:#fff;
+      background:transparent;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:800;
+      letter-spacing:.2px;
+      transition:.2s;
+      user-select:none;
+    }
+
+    .tab:hover{transform:translateY(-1px);}
+    .tab.active{
+      background:#fff;
+      color:var(--red2);
+      border-color:#fff;
+      box-shadow:0 8px 20px rgba(0,0,0,.15);
+    }
+
+    /* LAYOUT */
+    main{
+      max-width:var(--max);
+      margin:18px auto 70px;
+      padding:0 14px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+      border:1px solid var(--line);
+    }
+
+    .section-title{
+      margin:0 0 12px;
+      font-size:clamp(22px, 2.5vw, 34px);
+      color:var(--red2);
+      font-weight:950;
+      letter-spacing:.2px;
+    }
+
+    .muted{color:var(--muted);}
+
+    /* HOME */
+    .home-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+    }
+
+    .home-hero{
+      padding:26px;
+      border-radius:22px;
+      background: radial-gradient(1000px 500px at 20% 0%, rgba(179,0,0,.16), transparent 60%),
+                  radial-gradient(800px 500px at 90% 40%, rgba(179,0,0,.12), transparent 55%),
+                  #fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .home-hero p{
+      margin:0 0 12px;
+      font-size:17px;
+    }
+
+    .home-side{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .mini{
+      padding:18px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .mini h3{margin:0 0 8px; color:var(--red2);}
+
+    /* SQUAD */
+    .squad-wrap{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+
+    .squad-note{
+      background: #fff7f7;
+      border:1px solid #ffd2d2;
+      padding:14px 16px;
+      border-radius:16px;
+      color:#7a0a0a;
+      font-weight:700;
+    }
+
+    .squad-list{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:10px;
+    }
+
+    .player{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px 14px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .player strong{color:var(--red2)}
+    .player span{color:var(--muted); font-weight:700;}
+
+    /* MATCHES */
+    .matches{
+      display:grid;
+      gap:10px;
+    }
+
+    .match{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px 16px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .match .teams{font-weight:900;}
+    .match .score{
+      font-weight:950;
+      color:var(--red2);
+      background:#fff1f1;
+      border:1px solid #ffd2d2;
+      padding:6px 10px;
+      border-radius:999px;
+      min-width:88px;
+      text-align:center;
+    }
+
+    /* TABLE */
+    .table-wrap{
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:900px;
+    }
+
+    thead th{
+      position:sticky;
+      top:0;
+      background:#fff;
+      z-index:1;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+      color:var(--muted);
+      padding:14px 12px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      white-space:nowrap;
+    }
+
+    tbody td{
+      padding:14px 12px;
+      border-bottom:1px solid var(--line);
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    tbody tr:hover{background:#fafafa;}
+
+    .team-evrogol{
+      font-weight:950;
+      color:#111;
+    }
+
+    .pos{
+      width:60px;
+      color:var(--muted);
+      font-weight:900;
+    }
+
+    /* GALLERY */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:10px;
+    }
+
+    .thumb{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,.06);
+      aspect-ratio: 1/1;
+      display:block;
+    }
+
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:.2s;
+    }
+
+    .thumb:hover img{transform:scale(1.03);}
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.86);
+      display:none;
+      z-index:999;
+      touch-action:none;
+    }
+
+    .lightbox.open{display:block;}
+
+    .lb-ui{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+
+    .lb-stage{
+      position:relative;
+      width:min(1100px, 96vw);
+      height:min(720px, 80vh);
+      border-radius:22px;
+      overflow:hidden;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .lb-img{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%) scale(1);
+      transform-origin:center;
+      max-width:none;
+      width:auto;
+      height:auto;
+      max-height:100%;
+      max-width:100%;
+      user-select:none;
+      -webkit-user-drag:none;
+      cursor:grab;
+    }
+
+    .lb-img:active{cursor:grabbing;}
+
+    .lb-btn{
+      position:absolute;
+      top:14px;
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      font-weight:950;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      transition:.15s;
+      user-select:none;
+    }
+
+    .lb-btn:hover{transform:translateY(-1px); background:rgba(0,0,0,.5);}
+
+    .lb-close{right:14px;}
+
+    .lb-prev{
+      left:14px;
+      top:50%;
+      transform:translateY(-50%);
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      font-size:22px;
+    }
+
+    .lb-next{
+      right:14px;
+      top:50%;
+      transform:translateY(-50%);
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      font-size:22px;
+    }
+
+    .lb-caption{
+      position:absolute;
+      left:14px;
+      bottom:14px;
+      color:#fff;
+      font-weight:900;
+      background:rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.16);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+    }
+
+    /* INFO + CONTACT */
+    .info-box{
+      border:1px dashed #d3d3dc;
+      background:#fff;
+      padding:18px;
+      border-radius:18px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+
+    .contact a{
+      color:var(--red2);
+      font-weight:950;
+      text-decoration:none;
+    }
+
+    .contact a:hover{text-decoration:underline;}
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      padding:24px 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .home-grid{grid-template-columns:1fr;}
+      .squad-list{grid-template-columns:1fr;}
+      .gallery-grid{grid-template-columns: repeat(3, minmax(0,1fr));}
+      .contact{grid-template-columns:1fr;}
+    }
+
+    @media (max-width: 520px){
+      .logo{width:66px; height:66px;}
+      .tab{padding:9px 12px; border-radius:12px;}
+      .gallery-grid{grid-template-columns: repeat(2, minmax(0,1fr));}
+      .card{padding:18px;}
+      .home-hero{padding:20px;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="logo" title="ФК Евро Гол Прилеп">
+      <!-- СТАВИ ВО FOLDER images: evro gol logo.png -->
+      <img src="images/evro gol logo.png" alt="Лого ФК Евро Гол Прилеп" />
+    </div>
+
+    <div class="clubname">
+      <h1>ФК ЕВРО ГОЛ ПРИЛЕП</h1>
+    </div>
+  </div>
+
+  <nav aria-label="Навигација">
+    <button class="tab active" data-tab="home">Дома</button>
+    <button class="tab" data-tab="squad">Играчки состав</button>
+    <button class="tab" data-tab="matches">Натпревари</button>
+    <button class="tab" data-tab="table">Табела</button>
+    <button class="tab" data-tab="gallery">Галерија</button>
+    <button class="tab" data-tab="info">Инфо</button>
+    <button class="tab" data-tab="contact">Контакт</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HOME -->
+  <section id="home" class="panel">
+    <div class="home-grid">
+      <div class="home-hero">
+        <h2 class="section-title">Добредојдовте</h2>
+        <p>
+          <strong>ФК Евро Гол</strong> не е само фудбалски клуб — тоа е приказна за страст, дисциплина и вера во младите.
+          Ние веруваме дека вистинскиот играч не се гради само со талент, туку со карактер, работа и срце.
+        </p>
+        <p>
+          Во Евро Гол, фудбалот е повеќе од игра. Тој е начин на живот.
+          Секој тренинг е чекор кон подобра верзија од себе, секој натпревар е лекција,
+          а секоја победа е резултат на напорна работа, тимска игра и посветеност.
+        </p>
+        <p>
+          Нашата филозофија се темели на дисциплина, почит, пожртвуваност и континуиран развој.
+          Тука се градат пријателства, се учи што значи вистинска одговорност и се развива победнички менталитет.
+        </p>
+        <p>
+          <strong>Евро Гол е тим каде што секој член е важен.</strong>
+          Ние не бараме совршенство — бараме напредок.
+          И секој ден, одиме напред.
+        </p>
+      </div>
+
+      <div class="home-side">
+        <div class="mini">
+          <h3>Наши вредности</h3>
+          <div class="muted">
+            • Дисциплина<br>
+            • Тимска игра<br>
+            • Почит<br>
+            • Развој<br>
+            • Победнички дух
+          </div>
+        </div>
+
+        <div class="mini">
+          <h3>Мото</h3>
+          <div style="font-weight:950; font-size:18px; color:var(--red2)">
+            „Работи тивко — победи гласно.“
+          </div>
+          <div class="muted" style="margin-top:8px; font-weight:700;">
+            ФК Евро Гол Прилеп
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SQUAD -->
+  <section id="squad" class="panel" hidden>
+    <div class="card">
+      <h2 class="section-title">Играчки состав</h2>
+      <div class="squad-note">
+       
+      </div>
+
+      <div class="squad-wrap">
+        <div class="squad-list">
+          <div class="player"><strong></strong><span>#1 Мирчески Георгиј - голман</span></div>
+          <div class="player"><strong></strong><span>#5 Петровски Стефан - одбрана</span></div>
+          <div class="player"><strong></strong><span>#33 Мицески Димитар - одбрана</span></div>
+          <div class="player"><strong></strong><span>#3 Ристески Александар - одбрана</span></div>
+          <div class="player"><strong></strong><span>#37 Петрески Димитар - одбрана</span></div>
+          <div class="player"><strong></strong><span>#6 Кондоски Матеј - средина</span></div>
+          <div class="player"><strong></strong><span>#13 Тодороски Матеј - средина</span></div>
+          <div class="player"><strong></strong><span>#16 Попоски Димитар - средина</span></div>
+          <div class="player"><strong></strong><span>#27 Бајрами Бајрам - средина</span></div>
+          <div class="player"><strong></strong><span>#8 Станковски Андреј - напад</span></div>
+          <div class="player"><strong></strong><span>#10 Божиноски Лука - напад</span></div>
+          <div class="player"><strong></strong><span>#7 Гулески Илин - напад</span></div>
+          <div class="player"><strong></strong><span>#9 Талески Евгениј - напад</span></div>
+          <div class="player"><strong></strong><span>#20 Илиоски Петар - напад</span></div>
+          <div class="player"><strong></strong><span>#11 Оџаклиески Огнен - напад</span></div>
+          
+      
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATCHES -->
+  <section id="matches" class="panel" hidden>
+    <div class="card">
+      <h2 class="section-title">Натпревари</h2>
+      <div class="matches">
+     <div class="match">
+  <div class="teams">ФК Евро Гол vs ФК Тиквеш</div>
+  <div class="score">— : —</div>
+</div>
+
+        <div class="match">
+          <div class="teams">Евро Гол vs Ускана</div>
+          <div class="score">1 : 2</div>
+        </div>
+        <div class="match">
+          <div class="teams">ФК Евро Гол vs ФК Вондеркидс</div>
+          <div class="score">0 : 2</div>
+        </div>
+        <div class="match">
+          <div class="teams">ФК Евро Гол vs ФК Пелистер</div>
+          <div class="score">0 : 1</div>
+        </div>
+        <div class="match">
+          <div class="teams">ФК Евро Гол vs ФК Младост Полет</div>
+          <div class="score">3 : 0</div>
+        </div>
+        <div class="match">
+          <div class="teams">ФК Евро Гол vs ФК Кичево</div>
+          <div class="score">4 : 1</div>
+        </div>
+        <div class="match">
+          <div class="teams">ФК Евро Гол vs ФК Еден на Еден</div>
+          <div class="score">3 : 0</div>
+        </div>
+        <div class="match">
+          <div class="teams">ФК Евро Гол vs ФК Победа</div>
+          <div class="score">1 : 1</div>
+        </div>
+        <div class="match">
+          <div class="teams">ФК Евро Гол vs ФК Напредок</div>
+          <div class="score">10 : 0</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLE -->
+  <section id="table" class="panel" hidden>
+    <div class="card">
+      <h2 class="section-title">Табела</h2>
+      <div class="muted" style="font-weight:700; margin-bottom:12px;">
+        Податоци: место, одиграни натпревари, победени натпревари, нерешени натпревари, изгубени натпревати, дадени голови, примени голови, гол-разлика, бодови.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="pos">Место</th>
+              <th>Екипа</th>
+              <th>ОН</th>
+              <th>ПН</th>
+              <th>НН</th>
+              <th>ИН</th>
+              <th>ДГ</th>
+              <th>ПГ</th>
+              <th>ГР</th>
+              <th>Б</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pos">1</td>
+              <td>ФК Вондеркидс Фудбалска школа</td>
+              <td>8</td><td>8</td><td>0</td><td>0</td><td>58</td><td>3</td><td>+55</td><td>24</td>
+            </tr>
+            <tr>
+              <td class="pos">2</td>
+              <td>ФК Пелистер АД</td>
+              <td>8</td><td>7</td><td>0</td><td>1</td><td>33</td><td>4</td><td>+29</td><td>21</td>
+            </tr>
+            <tr>
+              <td class="pos">3</td>
+              <td>ФК Ускана</td>
+              <td>8</td><td>4</td><td>2</td><td>2</td><td>14</td><td>14</td><td>0</td><td>14</td>
+            </tr>
+            <tr>
+              <td class="pos">4</td>
+              <td class="team-evrogol">ФК Академија Евро Гол Прилеп</td>
+              <td>8</td><td>4</td><td>1</td><td>3</td><td>20</td><td>7</td><td>+13</td><td>13</td>
+            </tr>
+            <tr>
+              <td class="pos">5</td>
+              <td>ФК Победа АД</td>
+              <td>8</td><td>3</td><td>2</td><td>3</td><td>12</td><td>18</td><td>-6</td><td>11</td>
+            </tr>
+            <tr>
+              <td class="pos">6</td>
+              <td>ФК Кичево</td>
+              <td>8</td><td>3</td><td>1</td><td>4</td><td>21</td><td>24</td><td>-3</td><td>10</td>
+            </tr>
+            <tr>
+              <td class="pos">7</td>
+              <td>ФК Младост Полет Демир Хисар</td>
+              <td>8</td><td>1</td><td>1</td><td>6</td><td>12</td><td>38</td><td>-26</td><td>4</td>
+            </tr>
+            <tr>
+              <td class="pos">8</td>
+              <td>ФК Напредок 1928 Кичево</td>
+              <td>7</td><td>1</td><td>0</td><td>6</td><td>5</td><td>52</td><td>-47</td><td>3</td>
+            </tr>
+            <tr>
+              <td class="pos">9</td>
+              <td>ЗГФК Еден на Еден</td>
+              <td>7</td><td>0</td><td>1</td><td>6</td><td>3</td><td>18</td><td>-15</td><td>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="panel" hidden>
+    <div class="card">
+      <h2 class="section-title">Галерија</h2>
+      <div class="muted" style="font-weight:700; margin-bottom:12px;">
+              </div>
+
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section id="info" class="panel" hidden>
+    <div class="card">
+      <h2 class="section-title">Инфо</h2>
+      <div class="info-box">
+     
+        <br><br>
+        На 07.02.2026г нашата екипа ќе одигра пријателски натпревар со екипата на Тиквеш во гости на градскиот стадион во Кавадарци со почеток од 12ч.      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="panel" hidden>
+    <div class="card">
+      <h2 class="section-title">Контакт</h2>
+      <div class="contact">
+        <div class="mini">
+          <h3>Email</h3>
+          <div style="font-weight:900; font-size:18px;">
+            <a href="mailto:fkevrogolprilep@gmail.com">fkevrogolprilep@gmail.com</a>
+          </div>
+          <div class="muted" style="font-weight:700; margin-top:6px;">Пиши ни за информации, натпревари и соработка.</div>
+        </div>
+
+        <div class="mini">
+          <h3>Instagram</h3>
+          <div style="font-weight:900; font-size:18px;">
+            <a href="https://instagram.com/evro_gol" target="_blank" rel="noopener">@evro_gol</a>
+          </div>
+          <div class="muted" style="font-weight:700; margin-top:6px;">Следи нè за фотографии и резултати.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> ФК Евро Гол Прилеп — Сите права задржани.
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lb-ui">
+    <div class="lb-stage" id="lbStage">
+      <button class="lb-btn lb-close" id="lbClose" title="Затвори">✕</button>
+      <button class="lb-btn lb-prev" id="lbPrev" title="Претходна">‹</button>
+      <button class="lb-btn lb-next" id="lbNext" title="Следна">›</button>
+      <div class="lb-caption" id="lbCaption">Слика</div>
+      <img class="lb-img" id="lbImg" alt="Галерија" />
+    </div>
+  </div>
+</div>
+
+<script>
+  // ====== TAB NAVIGATION ======
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+
+  function openTab(name){
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    panels.forEach(p => p.hidden = (p.id !== name));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => openTab(btn.dataset.tab));
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ====== GALLERY BUILD ======
+  const galleryGrid = document.getElementById('galleryGrid');
+  const images = Array.from({length: 15}, (_, i) => `images/slika${i+1}.jpg`);
+
+  images.forEach((src, idx) => {
+    const a = document.createElement('a');
+    a.className = 'thumb';
+    a.href = '#';
+    a.dataset.index = idx;
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Слика ${idx+1}`;
+    img.loading = 'lazy';
+
+    a.appendChild(img);
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLightbox(idx);
+    });
+
+    galleryGrid.appendChild(a);
+  });
+
+  // ====== LIGHTBOX (ZOOM PC + PHONE) ======
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCaption = document.getElementById('lbCaption');
+  const lbClose = document.getElementById('lbClose');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+  const lbStage = document.getElementById('lbStage');
+
+  let currentIndex = 0;
+  let scale = 1;
+  let translateX = 0;
+  let translateY = 0;
+
+  // drag
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+
+  // touch pinch
+  let lastTouchDist = null;
+  let lastTouchMid = null;
+
+  function clamp(v, min, max){
+    return Math.max(min, Math.min(max, v));
+  }
+
+  function applyTransform(){
+    lbImg.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) scale(${scale})`;
+  }
+
+  function resetView(){
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
+    applyTransform();
+  }
+
+  function openLightbox(index){
+    currentIndex = index;
+    lbImg.src = images[currentIndex];
+    lbCaption.textContent = `Слика ${currentIndex + 1} / ${images.length}`;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    resetView();
+  }
+
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  function prevImg(){
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    lbImg.src = images[currentIndex];
+    lbCaption.textContent = `Слика ${currentIndex + 1} / ${images.length}`;
+    resetView();
+  }
+
+  function nextImg(){
+    currentIndex = (currentIndex + 1) % images.length;
+    lbImg.src = images[currentIndex];
+    lbCaption.textContent = `Слика ${currentIndex + 1} / ${images.length}`;
+    resetView();
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', prevImg);
+  lbNext.addEventListener('click', nextImg);
+
+  // close if click outside stage
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+
+  // keyboard
+  window.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') prevImg();
+    if(e.key === 'ArrowRight') nextImg();
+  });
+
+  // PC zoom with mouse wheel
+  lbStage.addEventListener('wheel', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    e.preventDefault();
+
+    const delta = Math.sign(e.deltaY);
+    const zoomStep = 0.12;
+
+    if(delta < 0) scale += zoomStep; // zoom in
+    else scale -= zoomStep; // zoom out
+
+    scale = clamp(scale, 1, 4);
+    applyTransform();
+  }, {passive:false});
+
+  // Drag (mouse)
+  lbImg.addEventListener('mousedown', (e) => {
+    if(scale <= 1) return;
+    isDragging = true;
+    startX = e.clientX - translateX;
+    startY = e.clientY - translateY;
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if(!isDragging) return;
+    translateX = e.clientX - startX;
+    translateY = e.clientY - startY;
+    applyTransform();
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  // Touch: pinch + drag
+  lbStage.addEventListener('touchstart', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+
+    if(e.touches.length === 1){
+      // drag
+      const t = e.touches[0];
+      isDragging = true;
+      startX = t.clientX - translateX;
+      startY = t.clientY - translateY;
+    }
+
+    if(e.touches.length === 2){
+      isDragging = false;
+      const t1 = e.touches[0];
+      const t2 = e.touches[1];
+      const dx = t1.clientX - t2.clientX;
+      const dy = t1.clientY - t2.clientY;
+      lastTouchDist = Math.hypot(dx, dy);
+      lastTouchMid = { x:(t1.clientX+t2.clientX)/2, y:(t1.clientY+t2.clientY)/2 };
+    }
+  }, {passive:false});
+
+  lbStage.addEventListener('touchmove', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    e.preventDefault();
+
+    if(e.touches.length === 1 && isDragging && scale > 1){
+      const t = e.touches[0];
+      translateX = t.clientX - startX;
+      translateY = t.clientY - startY;
+      applyTransform();
+    }
+
+    if(e.touches.length === 2){
+      const t1 = e.touches[0];
+      const t2 = e.touches[1];
+      const dx = t1.clientX - t2.clientX;
+      const dy = t1.clientY - t2.clientY;
+      const dist = Math.hypot(dx, dy);
+
+      if(lastTouchDist){
+        const ratio = dist / lastTouchDist;
+        scale = clamp(scale * ratio, 1, 4);
+        lastTouchDist = dist;
+        applyTransform();
+      }
+    }
+  }, {passive:false});
+
+  lbStage.addEventListener('touchend', (e) => {
+    if(e.touches.length === 0){
+      isDragging = false;
+      lastTouchDist = null;
+      lastTouchMid = null;
+    }
+
+    if(e.touches.length === 1){
+      // continue drag
+      const t = e.touches[0];
+      isDragging = true;
+      startX = t.clientX - translateX;
+      startY = t.clientY - translateY;
+    }
+  });
+</script>
+
+</body>
+</html>
